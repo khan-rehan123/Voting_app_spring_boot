@@ -15,13 +15,19 @@ import org.springframework.stereotype.Service;
 import com.voting.spring.dto.UserRegistrationDto;
 import com.voting.spring.model.Role;
 import com.voting.spring.model.User;
+import com.voting.spring.model.VotingList;
 import com.voting.spring.repository.UserRepository;
+import com.voting.spring.repository.VoteRepository;
 
 
 @Service
 public class UserServiceImpl implements UserService{
-
+	
+	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private VoteRepository vote1;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -52,6 +58,13 @@ public class UserServiceImpl implements UserService{
 	
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+	}
+
+	@Override
+	public VotingList saveVote(VotingList vote) {
+	System.out.println("vote list"+ vote.getVote());
+	
+		return this.vote1.save(vote);
 	}
 	
 }
