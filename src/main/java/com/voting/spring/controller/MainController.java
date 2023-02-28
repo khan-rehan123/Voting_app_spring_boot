@@ -28,7 +28,7 @@ public class MainController {
 	
 	@PostMapping("/saveVoter" )
 	public String VotingCont(@ModelAttribute VotingList vote) {
-		
+		//savd votere
 		System.out.println(vote.getVote());
 		System.out.println("hello home page");
 		this.user.saveVote(vote);
